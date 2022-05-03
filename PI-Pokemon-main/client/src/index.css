@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@font-face {
+font-family: "EarlyGameBoy";
+src: local("EarlyGameBoy"),url("./Fonts/EarlyGameboy/Early-GameBoy.ttf") format("truetype");
+}
+@font-face {
+font-family: "PocketMonk";
+src: local("PocketMonk"),url("./Fonts/PocketMonk/POCKET\ MONK.OTF") format("truetype");
+}

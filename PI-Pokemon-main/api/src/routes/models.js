@@ -5,7 +5,7 @@ module.exports = {
   //Me trae los pokemones que limite en el url y los carga en la base de datos hace un loop asincrono para meterlos en un arr que luego se crea en bulk cuando llamamos la ruta
   fetchPokemons: async () => {
     const pokemons = await axios(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
     );
     const pokemonStats = await pokemons.data.results.map((e) => {
       return e.url;
@@ -93,7 +93,7 @@ module.exports = {
       throw new Error("Pls use a valid url");
     }
     if (name && hp && str && def && spd && height && weight && img && slot1) {
-      await Pokemon.create({
+      const creado = await Pokemon.create({
         name: name,
         hp: hp,
         str: str,
@@ -104,23 +104,51 @@ module.exports = {
         img: img,
         slot1: slot1,
         slot2: slot2 ? slot2 : null,
+        createdInDb: true,
       });
-      if (await Pokemon.findOne({ where: { name: name } })) {
-        return "Pokemon created succesfully";
-      } else {
-        throw new Error("Theres been an issue pls try again");
-      }
+
+      // if (await Pokemon.findOne({ where: { name: name } })) {
+      //   return "Pokemon created succesfully";
+      // } else {
+      //   throw new Error("Theres been an issue pls try again");
+      // }
+      const relation1 = await Type.findOne({
+        where: {
+          name: slot1,
+        },
+      });
+      const relation2 = await Type.findOne({
+        where: {
+          name: slot2,
+        },
+      });
+
+      await creado.addType(relation1);
+      await creado.addType(relation2);
+      return "Pokemon created succesfully";
     }
   },
   findPoke: async (name) => {
     let pokemon = name.toLowerCase();
-    return await Pokemon.findOne({ where: { name: pokemon } });
+    if (!pokemon) {
+      throw new Error(`Pokemon ${name} doesnt exists`);
+    }
+    return await Pokemon.findOne({
+      where: { name: { [Op.iLike]: `%${pokemon}%` } },
+    });
   },
   findByType: async (slot1, slot2) => {
-    return await Pokemon.findAll({ where: { slot1: slot1, slot2: slot2 } });
+    return await Pokemon.findAll({
+      where: {
+        slot1: { [Op.iLike]: `%${slot1}%` },
+        slot2: { [Op.iLike]: `%${slot2}%` },
+      },
+    });
   },
   findByType1: async (slot1) => {
-    return await Pokemon.findAll({ where: { slot1: slot1, slot2: null } });
+    return await Pokemon.findAll({
+      where: { slot1: { [Op.iLike]: `%${slot1}%` }, slot2: null },
+    });
   },
   // findByType2: async (slot2) => {
   //   return await Pokemon.findAll({ where: { slot1:null,slot2: slot2 } });
@@ -145,14 +173,44 @@ module.exports = {
     return frontPokemon;
   },
   findById: async (idApi) => {
-    let findId = await Pokemon.findAll({ where: { idApi: idApi } });
+    let findId = await Pokemon.findAll({
+      where: { idApi: idApi },
+      attributes: {
+        exclude: ["idApi"],
+      },
+      include: {
+        model: Type,
+        attribute: ["name", "id"],
+        through: {
+          attribute: [],
+        },
+      },
+    });
     if (!findId) {
       throw new Error("Couldn't find the id you where looking for");
     }
     return findId;
   },
+  deleteFromDb: async function (idApi) {
+    var erase = await Pokemon.findOne({
+      where: { createdInDb: true, idApi: idApi },
+    });
+    if (erase) {
+      if (erase.dataValues.createdInDb) {
+        return erase;
+      }
+    } else {
+      throw new Error("Can't delete original pokemons!");
+    }
+  },
+
   getDb: async function () {
-    return await Pokemon.findAll();
+    return await Pokemon.findAll({
+      attribute: ["name"],
+      include: {
+        model: Type,
+      },
+    });
   },
 
   getTypesDb: async function () {

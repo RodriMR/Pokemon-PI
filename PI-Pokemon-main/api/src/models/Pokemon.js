@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
     },
     idApi: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -41,12 +41,16 @@ module.exports = (sequelize) => {
     img: {
       type: DataTypes.STRING,
     },
-    slot1:{
-      type:DataTypes.STRING,
-      allowNull:false
+    slot1: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    slot2:{
-      type:DataTypes.STRING
+    slot2: {
+      type: DataTypes.STRING,
+    },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   });
 };

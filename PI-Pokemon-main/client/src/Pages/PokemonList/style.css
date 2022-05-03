@@ -1,0 +1,9 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.container {
+  background-image: url("./PokemonTeam.gif");
+  background-size: contain;
+}

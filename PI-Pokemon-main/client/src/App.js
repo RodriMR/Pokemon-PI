@@ -1,16 +1,37 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import "./App.css";
+import React from "react";
+//import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./components/Home/index.jsx";
+import PokemonList from "./Pages/PokemonList/PokemonList";
+import NavBar from "./components/NavBar/index.jsx";
 
+import DetailList from "./Pages/PokemonDetails/PokemonDetails";
+
+import CreatePokemon from "./components/CreatePokemon";
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          {/* <Route path={'/'} element={'component'} /> */}
-        </Routes>
-        <h1>Cosas Chanchas</h1>
-      </div>
-    </BrowserRouter>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+
+        <Route path="/pokemons/:id" exact>
+          <NavBar />
+          <DetailList />
+        </Route>
+
+        <Route path="/pokemons" exact>
+          <NavBar />
+          <PokemonList />
+        </Route>
+        <Route path={"/create"} exact>
+          <NavBar />
+          <CreatePokemon />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

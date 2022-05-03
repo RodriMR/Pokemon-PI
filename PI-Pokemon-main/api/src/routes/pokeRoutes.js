@@ -1,13 +1,14 @@
 const { Pokemon } = require("../db");
 const express = require("express");
 const models = require("./models");
+const { deleteFromDb } = require("./models");
 const router = express.Router();
 //Prettier le gusta pegar todo junto y me molesta por eso existe este hermoso comentario para darme paz mental
 //
 //
 //
+//
 //Carga la base de datos si esta vacia y se fija de recibir nombre/types por query para buscarlos a la DB
-
 router.get("/", async (req, res, next) => {
   try {
     const allList = await models.fetchPokemons();
@@ -51,34 +52,32 @@ router.post("/pokemons", async (req, res, next) => {
 });
 router.get("/pokemons", async (req, res, next) => {
   if (req.query.name) {
-    const { name } = req.query;
     try {
-      res.status(200).send(await models.findPoke(name));
+      const { name } = req.query;
+      res.status(200).json(await models.findPoke(name));
+    } catch (err) {
+      res.status(400).send({ error: err.message });
+    }
+  } else if (req.query.slot1 && req.query.slot2) {
+    const { slot1, slot2 } = req.query;
+    try {
+      res.send(await models.findByType(slot1, slot2));
     } catch (err) {
       next(err);
     }
-  }
-  // if (req.query.slot1 && req.query.slot2) {
-  //   const { slot1, slot2 } = req.query;
-  //   try {
-  //     res.send(await models.findByType(slot1, slot2));
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-  // if (req.query.slot1 && !req.query.slot2) {
-  //   const { slot1 } = req.query;
-  //   try {
-  //     res.send(await models.findByType1(slot1));
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-
-  try {
-    res.json(await models.infoMainRoute());
-  } catch (err) {
-    res.status(404).json({ error: err.message });
+  } else if (req.query.slot1 && !req.query.slot2) {
+    const { slot1 } = req.query;
+    try {
+      res.send(await models.findByType1(slot1));
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    try {
+      res.json(await Pokemon.findAll());
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
   }
 });
 router.get("/pokemons/:id", async (req, res, next) => {
@@ -87,6 +86,19 @@ router.get("/pokemons/:id", async (req, res, next) => {
     res.send(await models.findById(id));
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+router.delete("/pokemons/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    let erase = await deleteFromDb(id);
+    if (erase) {
+      await Pokemon.destroy({ where: { idApi: id } });
+      const updateList = await Pokemon.findAll();
+      res.json(updateList);
+    }
+  } catch (err) {
+    res.status(404).json({ error: err.message });
   }
 });
 

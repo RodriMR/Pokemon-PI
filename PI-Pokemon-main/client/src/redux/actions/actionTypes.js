@@ -1,0 +1,6 @@
+
+export const LOAD_DATA_BASE="LOAD_DATA_BASE"
+export const LOAD_TYPES="LOAD_TYPES"
+export const GET_POKEMON_DETAIL="GET_POKEMON_DETAIL"
+export const ADD_TO_SQUAD="ADD_TO_SQUAD"
+export const DEL_FROM_SQUAD="DEL_FROM_SQUAD"

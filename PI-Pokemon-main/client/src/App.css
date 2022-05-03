@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+body {
+  text-transform: uppercase;
+}
+.EarlyGameBoy {
+  font-family: "EarlyGameBoy";
+}
+.PocketMonk {
+  font-family: "PocketMonk";
+}
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+/* ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+} */

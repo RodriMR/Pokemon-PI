@@ -1,0 +1,22 @@
+.navBar {
+  background-color: rgb(255 204 0);
+  text-decoration: none;
+  font-family: "EarlyGameBoy";
+  font-weight: bolder;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+/* ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+} */
+.logo {
+  height: 10vh;
+  width: auto;
+}
+
