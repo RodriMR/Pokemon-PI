@@ -7,3 +7,37 @@
   color: rgb(0, 0, 0);
   background-image: url("./PokemonClouds.gif");
 }
+/* .statHp {
+  color: green;
+  height: 1.5vh;
+  width: 35vh;
+  border-radius: 20px;
+}
+
+.statHp::-webkit-progress-bar {
+  background-color: rgb(240, 255, 255);
+  border-radius: 30px;
+}
+.statHp::-webkit-progress-value {
+  border-radius: 30px;
+}
+.statStr {
+  color: rgb(170, 1, 1);
+  height: 1.5vh;
+  width: 35vh;
+  border-radius: 20px;
+}
+
+.statStr::-webkit-progress-bar {
+  background-color: rgb(240, 255, 255);
+  border-radius: 30px;
+  color: brown;
+}
+.statStr::-webkit-progress-value {
+  border-radius: 30px;
+  color: brown;
+} */
+progress{
+  height: 2.5vh;
+  width: 35vh;
+}

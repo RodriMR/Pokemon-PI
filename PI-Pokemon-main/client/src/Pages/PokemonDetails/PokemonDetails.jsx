@@ -20,7 +20,7 @@ export default function DetailList() {
     <div>
       {pokemons.map((pokemon) => (
         <DetailsPokemon
-          key={pokemon.idApi}
+          key={pokemon.id}
           name={pokemon.name}
           img={pokemon.img}
           type1={pokemon.slot1}

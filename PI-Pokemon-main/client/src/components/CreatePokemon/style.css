@@ -1,6 +1,8 @@
-.mostrate{
-    background-color: brown;
+.mostrate {
+  background-color: brown;
+  background-image: url("./PokemonClouds.gif");
 }
-body{
-    background-image: url("./PokemonClouds.gif") ;
+
+.hidden {
+  display: none;
 }

@@ -6,4 +6,6 @@
 .container {
   background-image: url("./PokemonTeam.gif");
   background-size: contain;
+  min-height: 100vh;
+  min-width: 100vw;
 }

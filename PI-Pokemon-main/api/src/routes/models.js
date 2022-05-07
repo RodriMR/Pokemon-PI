@@ -65,33 +65,33 @@ module.exports = {
     if (await Pokemon.findOne({ where: { name: name } })) {
       throw new Error(`The pokemon ${name} already exists`);
     }
-    if (!name || typeof name !== "string") {
-      throw new Error("The name should recieve pokewords pls");
-    }
-    if (!hp || typeof hp !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!str || typeof str !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!def || typeof def !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!spd || typeof spd !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!height || typeof height !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!weight || typeof weight !== "number") {
-      throw new Error("Pls use numbers as a value");
-    }
-    if (!img || typeof img !== "string") {
-      throw new Error("Pls use a valid url");
-    }
-    if (!img.includes("https")) {
-      throw new Error("Pls use a valid url");
-    }
+    // if (!name || typeof name !== "string") {
+    //   throw new Error("The name should recieve pokewords pls");
+    // }
+    // if (!hp || typeof hp !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!str || typeof str !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!def || typeof def !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!spd || typeof spd !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!height || typeof height !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!weight || typeof weight !== "number") {
+    //   throw new Error("Pls use numbers as a value");
+    // }
+    // if (!img || typeof img !== "string") {
+    //   throw new Error("Pls use a valid url");
+    // }
+    // if (!img.includes("https")) {
+    //   throw new Error("Pls use a valid url");
+    // }
     if (name && hp && str && def && spd && height && weight && img && slot1) {
       const creado = await Pokemon.create({
         name: name,
