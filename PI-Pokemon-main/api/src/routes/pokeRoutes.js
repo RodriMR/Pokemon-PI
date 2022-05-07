@@ -54,7 +54,8 @@ router.get("/pokemons", async (req, res, next) => {
   if (req.query.name) {
     try {
       const { name } = req.query;
-      res.status(200).json(await models.findPoke(name));
+      const pokemon = await models.findPoke(name);
+      res.status(200).json([pokemon]);
     } catch (err) {
       res.status(400).send({ error: err.message });
     }

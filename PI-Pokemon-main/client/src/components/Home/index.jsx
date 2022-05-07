@@ -17,9 +17,9 @@ export default function Home() {
   return (
     <div className="body">
       <Link style={{ textDecoration: "none", color: "black" }} to={"/pokemons"}>
-        <div class="center-on-page">
-          <div class="pokeball">
-            <div class="pokeball__button"></div>
+        <div className="center-on-page">
+          <div className="pokeball">
+            <div className="pokeball__button"></div>
           </div>
         </div>
       </Link>

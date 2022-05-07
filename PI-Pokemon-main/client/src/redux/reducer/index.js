@@ -2,7 +2,8 @@ import {
   ADD_TO_SQUAD,
   DEL_FROM_SQUAD,
   GET_POKEMON_DETAIL,
-  LOAD_DATA_BASE,
+  GET_POKEMONS,
+  LOAD_TYPES,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -13,10 +14,16 @@ const initialState = {
 
 function reducer(state = initialState, { type, payload }) {
   switch (type) {
-    case LOAD_DATA_BASE: {
+    case GET_POKEMONS: {
       return {
         ...state,
         pokemons: payload,
+      };
+    }
+    case LOAD_TYPES: {
+      return {
+        ...state,
+        types: payload,
       };
     }
     case GET_POKEMON_DETAIL:
@@ -40,5 +47,4 @@ function reducer(state = initialState, { type, payload }) {
       return state;
   }
 }
-
 export default reducer;

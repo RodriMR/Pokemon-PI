@@ -1,7 +1,6 @@
 .body {
   background-image: url("./PokemonLandingPage.gif");
   background-size: cover;
-  width: auto;
   height: 100vh;
 }
 /*CSS PARA HOVER BUTTON QUE NO ME TERMINO DE GUSTAR 
@@ -32,9 +31,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-body {
-  background: #ecf0f1;
-}
+
 .center-on-page {
   position: absolute;
   top: 55%;

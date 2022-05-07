@@ -9,29 +9,35 @@ import NavBar from "./components/NavBar/index.jsx";
 import DetailList from "./Pages/PokemonDetails/PokemonDetails";
 
 import CreatePokemon from "./components/CreatePokemon";
+import Types from "./Pages/DisplayTypes/index.jsx";
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
+    <>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
 
-        <Route path="/pokemons/:id" exact>
-          <NavBar />
-          <DetailList />
-        </Route>
-
-        <Route path="/pokemons" exact>
-          <NavBar />
-          <PokemonList />
-        </Route>
-        <Route path={"/create"} exact>
-          <NavBar />
-          <CreatePokemon />
-        </Route>
-      </Switch>
-    </Router>
+          <Route path="/pokemons/:id" exact>
+            <NavBar />
+            <DetailList />
+          </Route>
+          <Route path="/types">
+            <NavBar />
+            {/* <Types /> */}
+          </Route>
+          <Route path="/pokemons" exact>
+            <NavBar />
+            <PokemonList />
+          </Route>
+          <Route path={"/create"} exact>
+            <NavBar />
+            <CreatePokemon />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
