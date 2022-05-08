@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./style.css";
+import "./style.css";
+
 export default function NavBar() {
   return (
     <div>
@@ -20,9 +21,9 @@ export default function NavBar() {
         <Link className="text-link" to="/create">
           Hatch new pokemon
         </Link>
-        <Link className="text-link" to="/types">
+        {/* <Link className="text-link" to="/types">
           Types
-        </Link>
+        </Link> */}
 
         <Link className="text-link" to="/pokemons/team">
           My team

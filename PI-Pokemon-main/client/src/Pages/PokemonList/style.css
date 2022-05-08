@@ -9,3 +9,13 @@
   min-height: 100vh;
   min-width: 100vw;
 }
+
+.container ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.buscadores{
+  text-align: center;
+}

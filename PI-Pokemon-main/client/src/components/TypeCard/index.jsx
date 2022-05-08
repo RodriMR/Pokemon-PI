@@ -1,12 +1,15 @@
 import React from "react";
 
-const TypeCard = ({ name, id }) => {
+const TypeCard = ({ name, id, setTypes }) => {
   return (
     <div>
-      <p>{name}</p>
-      <p>{id}</p>
+      <p>
+        <button onClick={() => setTypes(name)}>{name}</button>
+      </p>
     </div>
   );
 };
 
 export default TypeCard;
+
+

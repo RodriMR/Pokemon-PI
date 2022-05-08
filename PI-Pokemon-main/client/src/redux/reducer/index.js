@@ -1,50 +1,59 @@
 import {
-  ADD_TO_SQUAD,
-  DEL_FROM_SQUAD,
-  GET_POKEMON_DETAIL,
+  // ADD_TO_SQUAD,
+  // DEL_FROM_SQUAD,
   GET_POKEMONS,
   LOAD_TYPES,
+  FILTER_POKEMON,
 } from "../actions/actionTypes";
 
-const initialState = {
+export const initialState = {
   pokemons: [],
   types: [],
   team: [],
+  filterPokemons: [],
 };
 
-function reducer(state = initialState, { type, payload }) {
-  switch (type) {
+export function reducer(state = initialState, action) {
+  switch (action.type) {
     case GET_POKEMONS: {
       return {
         ...state,
-        pokemons: payload,
+        pokemons: action.payload,
       };
     }
     case LOAD_TYPES: {
       return {
         ...state,
-        types: payload,
+        types: action.payload,
       };
     }
-    case GET_POKEMON_DETAIL:
+
+    case FILTER_POKEMON: {
       return {
         ...state,
-        pokeDetails: payload,
+        filterPokemons: action.payload,
       };
-    case ADD_TO_SQUAD:
-      return {
-        ...state,
-        team: state.team.find((pokemon) => pokemon.id === payload.id)
-          ? [...state.team]
-          : [...state.team, payload],
-      };
-    case DEL_FROM_SQUAD:
-      return {
-        ...state,
-        team: state.team.filter((pokemon) => pokemon.id !== payload.id),
-      };
+    }
     default:
       return state;
   }
 }
 export default reducer;
+
+// case GET_POKEMON_DETAIL:
+//   return {
+//     ...state,
+//     pokeDetails: action.payload,
+//   };
+// case ADD_TO_SQUAD:
+//   return {
+//     ...state,
+//     team: state.team.find((pokemon) => pokemon.id === action.payload.id)
+//       ? [...state.team]
+//       : [...state.team, payload],
+//   };
+// case DEL_FROM_SQUAD:
+//   return {
+//     ...state,
+//     team: state.team.filter((pokemon) => pokemon.id !== payload.id),
+//   };

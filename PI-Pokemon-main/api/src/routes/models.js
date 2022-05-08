@@ -65,36 +65,36 @@ module.exports = {
     if (await Pokemon.findOne({ where: { name: name } })) {
       throw new Error(`The pokemon ${name} already exists`);
     }
-    // if (!name || typeof name !== "string") {
-    //   throw new Error("The name should recieve pokewords pls");
-    // }
-    // if (!hp || typeof hp !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!str || typeof str !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!def || typeof def !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!spd || typeof spd !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!height || typeof height !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!weight || typeof weight !== "number") {
-    //   throw new Error("Pls use numbers as a value");
-    // }
-    // if (!img || typeof img !== "string") {
-    //   throw new Error("Pls use a valid url");
-    // }
-    // if (!img.includes("https")) {
-    //   throw new Error("Pls use a valid url");
-    // }
+    if (!name || typeof name !== "string") {
+      throw new Error("The name should recieve pokewords pls");
+    }
+    if (!hp || typeof hp !== "number") {
+      throw new Error("Pls use numbers as a value for hp");
+    }
+    if (!str || typeof str !== "number") {
+      throw new Error("Pls use numbers as a value for str");
+    }
+    if (!def || typeof def !== "number") {
+      throw new Error("Pls use numbers as a value for def");
+    }
+    if (!spd || typeof spd !== "number") {
+      throw new Error("Pls use numbers as a value for spd");
+    }
+    if (!height || typeof height !== "number") {
+      throw new Error("Pls use numbers as a value for height");
+    }
+    if (!weight || typeof weight !== "number") {
+      throw new Error("Pls use numbers as a value for weight");
+    }
+    if (!img || typeof img !== "string") {
+      throw new Error("Pls use a valid url");
+    }
+    if (!img.includes("https")) {
+      throw new Error("Pls use a valid url");
+    }
     if (name && hp && str && def && spd && height && weight && img && slot1) {
       const creado = await Pokemon.create({
-        name: name,
+        name: name.toLowerCase(),
         hp: hp,
         str: str,
         def: def,
@@ -133,7 +133,7 @@ module.exports = {
     if (!pokemon) {
       throw new Error(`Pokemon ${name} doesnt exists`);
     }
-    return await Pokemon.findOne({
+    return await Pokemon.findAll({
       where: { name: { [Op.iLike]: `%${pokemon}%` } },
     });
   },
@@ -215,6 +215,14 @@ module.exports = {
 
   getTypesDb: async function () {
     return await Type.findAll();
+  },
+
+  orderBy: async function (by, filters) {
+    let ordenado = await Pokemon.findAll({
+      order: [[`${by}`, `${filters}`]],
+    });
+
+    return ordenado;
   },
 };
 //module.exports = { allPokemons, getDb, allTypes, getTypesDb };

@@ -4,6 +4,7 @@ import axios from "axios";
 import "./style.css";
 import { useParams } from "react-router-dom";
 import DetailsPokemon from "../../components/DetailsPokemon/index.jsx";
+
 export default function DetailList() {
   let { id } = useParams();
   const [pokemons, setPokemons] = useState([]);
@@ -17,7 +18,7 @@ export default function DetailList() {
     fetchPokemons();
   }, []);
   return (
-    <div>
+    <div className="details">
       {pokemons.map((pokemon) => (
         <DetailsPokemon
           key={pokemon.id}

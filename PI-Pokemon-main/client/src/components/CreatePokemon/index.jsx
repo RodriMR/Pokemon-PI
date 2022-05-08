@@ -40,19 +40,32 @@ const CreatePokemon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, hp, str, def, spd, height, weight, img, slot1, slot2 } = data;
+    console.log({
+      name,
+      hp,
+      str,
+      def,
+      spd,
+      height,
+      weight,
+      img,
+      slot1,
+      slot2,
+    });
     try {
-      const res = await axios.post("http://localhost:3001/pokemons", {
+      await axios.post("http://localhost:3001/pokemons", {
         name,
-        hp,
-        str,
-        def,
-        spd,
-        height,
-        weight,
+        hp: parseInt(hp),
+        str: parseInt(str),
+        def: parseInt(def),
+        spd: parseInt(spd),
+        height: parseInt(height),
+        weight: parseInt(weight),
         img,
         slot1,
         slot2,
       });
+
       alert(`Pokemon ${name} created succesfully`);
     } catch (err) {
       console.log(err);
@@ -68,6 +81,7 @@ const CreatePokemon = () => {
             name="name"
             value={data.name}
             onChange={handleChange}
+            required
           />
           {errors.name && <p>{errors.name}</p>}
         </label>
@@ -75,6 +89,7 @@ const CreatePokemon = () => {
         <label>
           Type 1
           <input
+            required
             type="text"
             name="slot1"
             value={data.slot1}
@@ -95,6 +110,7 @@ const CreatePokemon = () => {
         <label>
           Hp
           <input
+            required
             type="number"
             name="hp"
             value={data.hp}
@@ -107,6 +123,7 @@ const CreatePokemon = () => {
         <label>
           Str
           <input
+            required
             type="number"
             name="str"
             value={data.str}
@@ -120,6 +137,7 @@ const CreatePokemon = () => {
         <label>
           Def
           <input
+            required
             type="number"
             name="def"
             value={data.def}
@@ -133,6 +151,7 @@ const CreatePokemon = () => {
         <label>
           Spd
           <input
+            required
             type="number"
             name="spd"
             value={data.spd}
@@ -146,6 +165,7 @@ const CreatePokemon = () => {
         <label>
           Height
           <input
+            required
             type="number"
             name="height"
             value={data.height}
@@ -159,6 +179,7 @@ const CreatePokemon = () => {
         <label>
           Weight
           <input
+            required
             type="number"
             name="weight"
             value={data.weight}
@@ -172,6 +193,7 @@ const CreatePokemon = () => {
         <label>
           Img
           <input
+            required
             type="url"
             name="img"
             value={data.img}

@@ -1,7 +1,9 @@
-div{
-    font-family: "EarlyGameBoy"
+.details div{
+    font-family: "EarlyGameBoy";
+    background-image: url("./PokemonClouds.gif");
+    background-size: cover;
 }
-ul{
+.details ul{
     list-style-type: none;
     margin: 0;
     padding: 0;

@@ -32,6 +32,7 @@ router.post("/pokemons", async (req, res, next) => {
   const { name, hp, str, def, spd, height, weight, img, slot1, slot2 } =
     req.body;
   try {
+    
     res.status(201).json({
       msg: await models.addPoke(
         name,
@@ -55,7 +56,11 @@ router.get("/pokemons", async (req, res, next) => {
     try {
       const { name } = req.query;
       const pokemon = await models.findPoke(name);
-      res.status(200).json([pokemon]);
+      if (pokemon === null) {
+        res.status(404).send({ error: "Pokemon Not found" });
+      } else {
+        res.status(200).json(pokemon);
+      }
     } catch (err) {
       res.status(400).send({ error: err.message });
     }
@@ -81,6 +86,7 @@ router.get("/pokemons", async (req, res, next) => {
     }
   }
 });
+
 router.get("/pokemons/:id", async (req, res, next) => {
   let { id } = req.params;
   try {
@@ -100,6 +106,18 @@ router.delete("/pokemons/:id", async (req, res, next) => {
     }
   } catch (err) {
     res.status(404).json({ error: err.message });
+  }
+});
+
+router.get("/filter", async (req, res, next) => {
+  let log = req.query.by + req.query.filters;
+  try {
+    console.log(log);
+    let filter = await models.orderBy(req.query.by, req.query.filters);
+
+    res.status(200).json(filter);
+  } catch (err) {
+    next(err);
   }
 });
 
