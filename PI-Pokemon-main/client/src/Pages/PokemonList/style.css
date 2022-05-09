@@ -5,17 +5,17 @@
 }
 .container {
   background-image: url("./PokemonTeam.gif");
-  background-size: contain;
-  min-height: 100vh;
-  min-width: 100vw;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
 }
 
-.container ul{
+.container ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: inline-block;
 }
-.buscadores{
+.buscadores {
   text-align: center;
 }

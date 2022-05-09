@@ -73,7 +73,7 @@ const CreatePokemon = () => {
   };
   return (
     <div className="mostrate">
-      <form onSubmit={handleSubmit}>
+      <form className="formulario" onSubmit={handleSubmit}>
         <label>
           Name
           <input
@@ -134,74 +134,76 @@ const CreatePokemon = () => {
           />
         </label>
         <br />
-        <label>
-          Def
-          <input
-            required
-            type="number"
-            name="def"
-            value={data.def}
-            onChange={handleChange}
-            maxLength={3}
-            max={100}
-            min={1}
-          />
-        </label>
+        <label>Def</label>
         <br />
-        <label>
-          Spd
-          <input
-            required
-            type="number"
-            name="spd"
-            value={data.spd}
-            onChange={handleChange}
-            maxLength={3}
-            max={100}
-            min={1}
-          />
-        </label>
+        <input
+          required
+          type="number"
+          name="def"
+          value={data.def}
+          onChange={handleChange}
+          maxLength={3}
+          max={100}
+          min={1}
+        />
+
         <br />
-        <label>
-          Height
-          <input
-            required
-            type="number"
-            name="height"
-            value={data.height}
-            onChange={handleChange}
-            maxLength={5}
-            max={10000}
-            min={1}
-          />
-        </label>
+        <label>Spd</label>
         <br />
-        <label>
-          Weight
-          <input
-            required
-            type="number"
-            name="weight"
-            value={data.weight}
-            onChange={handleChange}
-            maxLength={5}
-            max={10000}
-            min={1}
-          />
-        </label>
+        <input
+          required
+          type="number"
+          name="spd"
+          value={data.spd}
+          onChange={handleChange}
+          maxLength={3}
+          max={100}
+          min={1}
+        />
+
         <br />
-        <label>
-          Img
-          <input
-            required
-            type="url"
-            name="img"
-            value={data.img}
-            onChange={handleChange}
-          />
-        </label>
+        <label>Height</label>
         <br />
-        <button type="submit">Hatch! </button>
+        <input
+          required
+          type="number"
+          name="height"
+          value={data.height}
+          onChange={handleChange}
+          maxLength={5}
+          max={10000}
+          min={1}
+        />
+
+        <br />
+        <label>Weight</label>
+        <br />
+        <input
+          required
+          type="number"
+          name="weight"
+          value={data.weight}
+          onChange={handleChange}
+          maxLength={5}
+          max={10000}
+          min={1}
+        />
+
+        <br />
+        <label>Img</label>
+        <br />
+        <input
+          required
+          type="url"
+          name="img"
+          value={data.img}
+          onChange={handleChange}
+        />
+        <br />
+
+        <button className="hatch" type="submit">
+          Hatch!{" "}
+        </button>
       </form>
     </div>
   );

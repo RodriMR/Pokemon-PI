@@ -36,6 +36,11 @@ export default function PokemonList() {
         (pokemon) => pokemon.slot1 === type1
       );
     }
+    if (type1 === "" && type2 !== "" && origin === "all") {
+      filterPokemons = state.pokemons.filter(
+        (pokemon) => pokemon.slot2 === type2
+      );
+    }
     if (type1 && type2 !== "" && origin === "all") {
       filterPokemons = state.pokemons.filter(
         (pokemon) => pokemon.slot1 === type1 && pokemon.slot2 === type2
@@ -48,6 +53,11 @@ export default function PokemonList() {
     if (type1 && type2 === "" && origin === "world") {
       filterPokemons = state.pokemons.filter(
         (pokemon) => pokemon.slot1 === type1 && pokemon.createdInDb === false
+      );
+    }
+    if (type1 === "" && type2 !== "" && origin === "world") {
+      filterPokemons = state.pokemons.filter(
+        (pokemon) => pokemon.slot2 === type2 && pokemon.createdInDb === false
       );
     }
     if (type1 && type2 !== "" && origin === "world") {
@@ -68,6 +78,11 @@ export default function PokemonList() {
     if (type1 && type2 === "" && origin === "hatched") {
       filterPokemons = state.pokemons.filter(
         (pokemon) => pokemon.slot1 === type1 && pokemon.createdInDb === true
+      );
+    }
+    if (type1 === "" && type2 !== "" && origin === "hatched") {
+      filterPokemons = state.pokemons.filter(
+        (pokemon) => pokemon.slot2 === type2 && pokemon.createdInDb === true
       );
     }
     if (type1 && type2 !== "" && origin === "hatched") {
@@ -146,13 +161,13 @@ export default function PokemonList() {
         {console.log({ type1, type2, atribute, order })}
         <div className="buscadores">
           <SearchBar setError={setError} />
-          <label>Page:</label>
           <Paginas
             pokemonNum={state.filterPokemons.length}
             setCurrentPage={setCurrentPage}
             pagina={pagina}
             pokemonsInPage={pokemonsInPage}
           />
+          <label>Page:</label>
 
           <button
             onClick={() => {

@@ -9,13 +9,11 @@ const Paginas = ({ pokemonNum, pagina, pokemonsInPage }) => {
   }
   return (
     <nav>
-      <ul>
-        {numPages?.map((number) => (
-          <li key={number}>
-            <button onClick={() => pagina(number)}>{number}</button>
-          </li>
-        ))}
-      </ul>
+      {numPages?.map((number) => (
+        <button key={number} onClick={() => pagina(number)}>
+          {number}
+        </button>
+      ))}
     </nav>
   );
 };

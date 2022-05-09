@@ -9,8 +9,9 @@
 }
 
 .card img {
-  width: auto;
-  height: 15vh;
+  height: 150px;
+  margin: auto;
+  /* display: inline-block; */
 }
 .infoCard {
   display: flex;
