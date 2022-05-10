@@ -1,7 +1,7 @@
-import React from 'react'
-
+import React from "react";
+import { Card } from "../Card/index";
 export default function Team() {
-  return (
-    <div>Team</div>
-  )
+
+  
+  return <div>ola</div>;
 }

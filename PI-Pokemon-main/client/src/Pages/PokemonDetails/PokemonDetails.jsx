@@ -8,14 +8,14 @@ import DetailsPokemon from "../../components/DetailsPokemon/index.jsx";
 export default function DetailList() {
   let { id } = useParams();
   const [pokemons, setPokemons] = useState([]);
-  const fetchPokemons = async () => {
+  const fetchPokemonById = async () => {
     const fetchedPokemons = await axios.get(
       `http://localhost:3001/pokemons/${id}`
     );
     setPokemons(fetchedPokemons.data);
   };
   useEffect(() => {
-    fetchPokemons();
+    fetchPokemonById();
   }, []);
   return (
     <div className="details">

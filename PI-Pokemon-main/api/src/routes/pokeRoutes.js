@@ -32,7 +32,6 @@ router.post("/pokemons", async (req, res, next) => {
   const { name, hp, str, def, spd, height, weight, img, slot1, slot2 } =
     req.body;
   try {
-    
     res.status(201).json({
       msg: await models.addPoke(
         name,
@@ -93,6 +92,14 @@ router.get("/pokemons/:id", async (req, res, next) => {
     res.send(await models.findById(id));
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+router.patch("/pokemons", async (req, res, next) => {
+  let { id } = req.body;
+  try {
+    res.status(200).json(await models.capturePoke(id));
+  } catch (err) {
+    next(err);
   }
 });
 router.delete("/pokemons/:id", async (req, res, next) => {

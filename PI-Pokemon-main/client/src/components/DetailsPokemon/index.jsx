@@ -16,7 +16,7 @@ export default function DetailsPokemon({
 }) {
   return (
     <div className="pokemonDetails">
-      <p>{name}</p>
+      <p>{id}-{name}</p>
       <img className="sprite" src={img} alt={`Pokemon ${name}`} />
       <p>
         {type1}-{type2}

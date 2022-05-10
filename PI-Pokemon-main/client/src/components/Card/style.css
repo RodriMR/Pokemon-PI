@@ -1,5 +1,5 @@
 .card {
-  border: rgba(0, 117, 190, 0.8) solid 1px;
+  border: rgba(0, 0, 0, 0.8) solid 1px;
   background-color: rgba(202, 220, 159, 0.95);
 
   margin: 10px;
@@ -9,11 +9,11 @@
 }
 
 .card img {
-  height: 150px;
+  height: 100px;
   margin: auto;
   /* display: inline-block; */
 }
-.infoCard {
+.infoCard {font-size: 11px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

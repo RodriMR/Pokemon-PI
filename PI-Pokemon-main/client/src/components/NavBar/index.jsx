@@ -21,11 +21,8 @@ export default function NavBar() {
         <Link className="text-link" to="/create">
           Hatch new pokemon
         </Link>
-        {/* <Link className="text-link" to="/types">
-          Types
-        </Link> */}
 
-        <Link className="text-link" to="/pokemons/team">
+        <Link className="text-link" to="/team">
           My team
         </Link>
       </header>

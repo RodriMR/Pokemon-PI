@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useStore } from "../../context/store";
 import { GET_POKEMONS } from "../../redux/actions/actionTypes";
+import "./style.css";
 export default function SearchBar({ setError }) {
   const [input, setInput] = useState("");
   const handleChange = (e) => {
@@ -29,8 +30,16 @@ export default function SearchBar({ setError }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={input} onChange={handleChange} />
-        <button type="submit">Search</button>
+        <input
+          placeholder="Pokename..."
+          className="inputSearch"
+          type="text"
+          value={input}
+          onChange={handleChange}
+        />
+        <button className="searchBtn" type="submit">
+          Search
+        </button>
       </form>
     </div>
   );

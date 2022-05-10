@@ -3,27 +3,7 @@
   background-size: cover;
   height: 100vh;
 }
-/*CSS PARA HOVER BUTTON QUE NO ME TERMINO DE GUSTAR 
-.enterPokedex {
-  margin-top: 20px;
-  line-height: 60px;
-  font-weight: bold;
-  font-size: large;
-  color: black;
-  padding: 0 40px;
-  background: lightblue;
-  border: 3px rgb(23, 3, 248);
-  border-radius: 40px;
-  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.6);
-  text-decoration: none;
-}
-.enterPokedex:hover {
-  background: #003060;
-  color: white;
-  position: relative;
-  top: 10px;
-  box-shadow: none;
-} */
+
 *,
 *:before,
 *:after {
@@ -38,7 +18,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* Poké Styles */
+/* Pokestilos */
 .pokeball {
   position: relative;
   width: 200px;
@@ -79,7 +59,7 @@
   box-shadow: 0 0 0 10px black;
   animation: blink 0.5s alternate 70;
 }
-/* Animation */
+/* Animacion */
 @keyframes blink {
   from {
     background: #eee;

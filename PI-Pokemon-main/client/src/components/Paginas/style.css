@@ -1,0 +1,14 @@
+.btnPaginas {
+  text-align: center;
+  margin: 5px;
+  font-family: "EarlyGameBoy";
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(255, 204, 0);
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.27);
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.27);
+  height: 30px;
+  width: 60px;
+}

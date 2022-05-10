@@ -19,3 +19,46 @@
 .buscadores {
   text-align: center;
 }
+
+.select {
+  border: 3px solid black;
+  border-radius: 5px;
+  width: 165px;
+  height: 30px;
+  font-family: "EarlyGameBoy";
+  font-weight: bold;
+}
+
+.resetBtn {
+  margin-top: 25px;
+  margin-right: 15px;
+  height: 30px;
+  width: 85px;
+  font-family: "EarlyGameBoy";
+  background-color: rgb(255 204 0);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  align-self: center;
+  flex-direction: row;
+  font-size: 12px;
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.selectGroup {
+  display: flex;
+  justify-content: center;
+}
+.labels {
+  font-family: "EarlyGameBoy";
+  font-size: 14px;
+}
+.findSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

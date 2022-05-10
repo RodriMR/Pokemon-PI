@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./style.css";
 const Paginas = ({ pokemonNum, pagina, pokemonsInPage }) => {
   const pages = Math.round(pokemonNum / pokemonsInPage);
 
@@ -10,7 +10,11 @@ const Paginas = ({ pokemonNum, pagina, pokemonsInPage }) => {
   return (
     <nav>
       {numPages?.map((number) => (
-        <button key={number} onClick={() => pagina(number)}>
+        <button
+          className="btnPaginas"
+          key={number}
+          onClick={() => pagina(number)}
+        >
           {number}
         </button>
       ))}

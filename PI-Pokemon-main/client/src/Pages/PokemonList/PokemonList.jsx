@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import Card from "../../components/Pokemon";
+import Card from "../../components/Card";
 import "./style.css";
 import SearchBar from "../../components/SearchBar";
 import { useStore } from "../../context/store";
 import { fetchPokemons, getTypes } from "../../redux/actions/index";
 import Paginas from "../../components/Paginas";
 import { FILTER_POKEMON, GET_POKEMONS } from "../../redux/actions/actionTypes";
-import axios from "axios";
 
 export default function PokemonList() {
   const [error, setError] = useState(false);
@@ -139,6 +138,7 @@ export default function PokemonList() {
     fetchPokemons(dispatch);
     getTypes(dispatch);
   }, []);
+
   useEffect(() => {
     handleFilter();
   }, [type1, type2, state.pokemons, origin]);
@@ -146,84 +146,98 @@ export default function PokemonList() {
     handleOrder();
   }, [atribute, order]);
 
-  // const handleAtribute = async (e) => {
-  //   setAtribute(e.target.value);
-  //  await axios.get(`http://localhost:3001/filter?by=${atribute}&order=${order}`)
-
-  // };
-  // const handleOrder = (e) => {
-  //   setOrder(e.target.value);
-  // };
-
   return (
     <div className="container">
       <div>
-        {console.log({ type1, type2, atribute, order })}
         <div className="buscadores">
-          <SearchBar setError={setError} />
-          <Paginas
-            pokemonNum={state.filterPokemons.length}
-            setCurrentPage={setCurrentPage}
-            pagina={pagina}
-            pokemonsInPage={pokemonsInPage}
-          />
-          <label>Page:</label>
-
-          <button
-            onClick={() => {
-              fetchPokemons(dispatch);
-              setError(false);
-              setType1("");
-              setType2("");
-              setAtribute("");
-              setOrigin("all");
-              setOrder("DESC");
-            }}
-          >
-            Reset
-          </button>
-          <label>Type:1</label>
-          <select value={type1} onChange={(e) => setType1(e.target.value)}>
-            <option value="">All</option>
-            {state.types?.map((type) => (
-              <option value={type.name} key={type.id} id={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </select>
-          <label>Type:2</label>
-          <select value={type2} onChange={(e) => setType2(e.target.value)}>
-            <option value="">All</option>
-            {state.types?.map((type) => (
-              <option value={type.name} key={type.id} id={type.id}>
-                {type.name}
-              </option>
-            ))}
-            <option value={null}>empty</option>
-          </select>
-          <label>Atribute:</label>
-          <select
-            value={atribute}
-            onChange={(e) => setAtribute(e.target.value)}
-          >
-            <option value="">All</option>
-            <option value="name">Name</option>
-            <option value="hp">Hp</option>
-            <option value="str">Str</option>
-            <option value="def">Def</option>
-            <option value="spd">Spd</option>
-          </select>
-          <label>Order:</label>
-          <select value={order} onChange={(e) => setOrder(e.target.value)}>
-            <option value="DESC">Desc</option>
-            <option value="ASC">Asc</option>
-          </select>
-          <label>From:</label>
-          <select value={origin} onChange={(e) => setOrigin(e.target.value)}>
-            <option value="all">All</option>
-            <option value="world">World</option>
-            <option value="hatched">Hatched</option>
-          </select>
+          <div className="findSection">
+            <button
+              className="resetBtn"
+              onClick={() => {
+                fetchPokemons(dispatch);
+                setError(false);
+                setType1("");
+                setType2("");
+                setAtribute("");
+                setOrigin("all");
+                setOrder("DESC");
+              }}
+            >
+              Reset
+            </button>
+            <SearchBar setError={setError} />
+          </div>
+          <div className="selectGroup">
+            <div className="selectContainer">
+              <label className="labels">Type:1</label>
+              <select
+                className="select"
+                value={type1}
+                onChange={(e) => setType1(e.target.value)}
+              >
+                <option value="">All</option>
+                {state.types?.map((type) => (
+                  <option value={type.name} key={type.id} id={type.id}>
+                    {type.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="selectContainer">
+              <label className="labels">Type:2</label>
+              <select
+                className="select"
+                value={type2}
+                onChange={(e) => setType2(e.target.value)}
+              >
+                <option value="">All</option>
+                {state.types?.map((type) => (
+                  <option value={type.name} key={type.id} id={type.id}>
+                    {type.name}
+                  </option>
+                ))}
+                <option value={null}>empty</option>
+              </select>
+            </div>
+            <div className="selectContainer">
+              <label className="labels">Atribute:</label>
+              <select
+                className="select"
+                value={atribute}
+                onChange={(e) => setAtribute(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="name">Name</option>
+                <option value="hp">Hp</option>
+                <option value="str">Str</option>
+                <option value="def">Def</option>
+                <option value="spd">Spd</option>
+              </select>
+            </div>
+            <div className="selectContainer">
+              <label className="labels">Order:</label>
+              <select
+                className="select"
+                value={order}
+                onChange={(e) => setOrder(e.target.value)}
+              >
+                <option value="DESC">Desc</option>
+                <option value="ASC">Asc</option>
+              </select>
+            </div>
+            <div className="selectContainer">
+              <label className="labels">From:</label>
+              <select
+                className="select"
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
+              >
+                <option value="all">All</option>
+                <option value="world">World</option>
+                <option value="hatched">Hatched</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -245,6 +259,14 @@ export default function PokemonList() {
           })}
         </div>
       )}
+      <div className="buscadores">
+        <Paginas
+          pokemonNum={state.filterPokemons.length}
+          setCurrentPage={setCurrentPage}
+          pagina={pagina}
+          pokemonsInPage={pokemonsInPage}
+        />
+      </div>
     </div>
   );
 }

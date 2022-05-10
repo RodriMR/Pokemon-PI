@@ -5,7 +5,7 @@ module.exports = {
   //Me trae los pokemones que limite en el url y los carga en la base de datos hace un loop asincrono para meterlos en un arr que luego se crea en bulk cuando llamamos la ruta
   fetchPokemons: async () => {
     const pokemons = await axios(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100"
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
     );
     const pokemonStats = await pokemons.data.results.map((e) => {
       return e.url;
@@ -176,7 +176,7 @@ module.exports = {
     let findId = await Pokemon.findAll({
       where: { idApi: idApi },
       attributes: {
-        exclude: ["idApi"],
+        exclude: ["id"],
       },
       include: {
         model: Type,
@@ -224,5 +224,16 @@ module.exports = {
 
     return ordenado;
   },
+  capturePoke: async function (idApi) {
+    let captured = await Pokemon.findOne({
+      where: { idApi: idApi },
+    });
+
+    if (!captured.isCaptured) {
+      captured.update({ isCaptured: true });
+    } else {
+      captured.update({ isCaptured: false });
+    }
+    return captured;
+  },
 };
-//module.exports = { allPokemons, getDb, allTypes, getTypesDb };
