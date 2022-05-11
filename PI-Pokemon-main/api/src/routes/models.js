@@ -88,6 +88,9 @@ module.exports = {
     if (!weight || typeof weight !== "number") {
       throw new Error("Pls use numbers as a value for weight");
     }
+    if (slot1 === slot2) {
+      throw new Error("Pokemons dont repeat types, pls select different ones!");
+    }
     if (!img || typeof img !== "string") {
       throw new Error("Pls use a valid url");
     }
