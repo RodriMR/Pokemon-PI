@@ -25,7 +25,6 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-//Query de nombre o types
 
 //Ruta post para crear un pokemon
 router.post("/pokemons", async (req, res, next) => {
@@ -50,6 +49,7 @@ router.post("/pokemons", async (req, res, next) => {
     res.status(400).json({ error: err.message });
   }
 });
+//Es un poco de todo, se fija si recibe query(name,slot1,slot2), si recibe busca por query sino trae todos los POKES de la DB
 router.get("/pokemons", async (req, res, next) => {
   if (req.query.name) {
     try {
@@ -85,7 +85,7 @@ router.get("/pokemons", async (req, res, next) => {
     }
   }
 });
-
+//Busco por id
 router.get("/pokemons/:id", async (req, res, next) => {
   let { id } = req.params;
   try {
@@ -94,14 +94,17 @@ router.get("/pokemons/:id", async (req, res, next) => {
     res.status(400).json({ error: err.message });
   }
 });
-router.patch("/pokemons", async (req, res, next) => {
-  let { id } = req.body;
+//WORK IN PROGRESS patch para capturar pokemones
+router.put("/pokemons/capture", async (req, res, next) => {
+  let { idCapture } = req.body;
+
   try {
-    res.status(200).json(await models.capturePoke(id));
+    res.status(200).json(await models.capturePoke(idCapture.id));
   } catch (err) {
     next(err);
   }
 });
+//WORK IN PROGRESS delete para borrar SOLO los creados por mi, no te deja los de la api(aproposito)
 router.delete("/pokemons/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -115,11 +118,11 @@ router.delete("/pokemons/:id", async (req, res, next) => {
     res.status(404).json({ error: err.message });
   }
 });
-
+//WORK IN PROGRESS filtros por parametros enviados por body/query
 router.get("/filter", async (req, res, next) => {
   let log = req.query.by + req.query.filters;
   try {
-    console.log(log);
+    
     let filter = await models.orderBy(req.query.by, req.query.filters);
 
     res.status(200).json(filter);

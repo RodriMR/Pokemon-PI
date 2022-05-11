@@ -14,7 +14,7 @@ export default function PokemonList() {
   const [type2, setType2] = useState("");
   const [atribute, setAtribute] = useState("");
   const [origin, setOrigin] = useState("all");
-  const [order, setOrder] = useState("DESC");
+  const [order, setOrder] = useState("ASC");
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsInPage] = useState(12);
   const indexLastPokemon = currentPage * pokemonsInPage;
@@ -117,7 +117,7 @@ export default function PokemonList() {
     let orderAllPokemons = [];
     let orderPokemons = [];
     if (atribute) {
-      if (order === "ASC") {
+      if (order === "DESC") {
         orderPokemons = state.filterPokemons.reverse(compare);
         orderAllPokemons = state.pokemons.reverse(compare);
       } else {
@@ -148,9 +148,11 @@ export default function PokemonList() {
 
   return (
     <div className="container">
+     
       <div>
         <div className="buscadores">
           <div className="findSection">
+            {/* Boton de reinicio que no solo setea los estados locales(filtro) sino que me reinicia el store de pokemones */}
             <button
               className="resetBtn"
               onClick={() => {
@@ -160,7 +162,7 @@ export default function PokemonList() {
                 setType2("");
                 setAtribute("");
                 setOrigin("all");
-                setOrder("DESC");
+                setOrder("ASC");
               }}
             >
               Reset
@@ -221,8 +223,8 @@ export default function PokemonList() {
                 value={order}
                 onChange={(e) => setOrder(e.target.value)}
               >
-                <option value="DESC">Desc</option>
                 <option value="ASC">Asc</option>
+                <option value="DESC">Desc</option>
               </select>
             </div>
             <div className="selectContainer">
@@ -241,11 +243,9 @@ export default function PokemonList() {
         </div>
       </div>
 
-      {error ? (
-        <p>Pokemon doesnt exist</p>
-      ) : (
-        <div className="cards">
-          {currentPokemons?.map((pokemon) => {
+      <div className="cards">
+        {state.pokemons.length ? (
+          currentPokemons?.map((pokemon) => {
             return (
               <Card
                 key={pokemon.id}
@@ -256,9 +256,12 @@ export default function PokemonList() {
                 id={pokemon.idApi}
               />
             );
-          })}
-        </div>
-      )}
+          })
+        ) : (
+          <p className="notFound">Pokemon not found</p>
+        )}
+      </div>
+
       <div className="buscadores">
         <Paginas
           pokemonNum={state.filterPokemons.length}

@@ -4,9 +4,8 @@ import {
   ADD_TO_SQUAD,
   DEL_FROM_SQUAD,
   GET_POKEMONS,
-  GET_POKEMON_DETAIL,
   LOAD_TYPES,
-  // FILTER_POKEMON
+  MANTAIN_FILTER,
 } from "./actionTypes";
 
 export const fetchPokemons = async (dispatch) => {
@@ -16,17 +15,14 @@ export const fetchPokemons = async (dispatch) => {
     payload: fetchedPokemons.data,
   });
 };
-
-export function getPokemonDetail(id) {
-  return (dispatch) => {
-    return axios
-      .get(`http://localhost:3001/pokemons/${id}`)
-      .then((res) =>
-        dispatch({ type: GET_POKEMON_DETAIL, payload: res.data.results })
-      );
-  };
-}
-export function addToTeam(payload) {
+export const mantainFilter = async (dispatch) => {
+  const fetchedPokemons = await axios.get("http://localhost:3001/pokemons");
+  dispatch({
+    type: MANTAIN_FILTER,
+    payload: fetchedPokemons.data,
+  });
+};
+export function addToSquad(payload) {
   return {
     type: ADD_TO_SQUAD,
     payload,

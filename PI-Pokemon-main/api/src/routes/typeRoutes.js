@@ -6,6 +6,7 @@ const models = require("./models");
 //
 //
 //
+//Pense que iba a poner mas rutas aca pero quedo como indio, solari
 router.get("/types", async (req, res, next) => {
   try {
     const allList = await models.fetchTypes();

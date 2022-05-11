@@ -1,6 +1,8 @@
 const { Pokemon, Type } = require("../db");
 const axios = require("axios");
 const { Op } = require("sequelize");
+
+//Exportamos todo en conjunto para dsps llamarlo por models.funcion en express
 module.exports = {
   //Me trae los pokemones que limite en el url y los carga en la base de datos hace un loop asincrono para meterlos en un arr que luego se crea en bulk cuando llamamos la ruta
   fetchPokemons: async () => {
@@ -33,7 +35,7 @@ module.exports = {
 
     return arr;
   },
-  //Me trae todos los typos y los carga en la base de datos
+  //Me trae todos los tipos de la api y los carga en la base de datos
   fetchTypes: async () => {
     const types = await axios("https://pokeapi.co/api/v2/type");
     var arr = [];
@@ -49,7 +51,7 @@ module.exports = {
     }
     return arr;
   },
-  //Agrega un pokemon si los parametros son los correctos
+  //Agrega un pokemon si los parametros son los correctos, puedo agregar 1000 validaciones mas como largo y valores de los inputs  pero el punto era ver que puedo hacerlo funcionar, el punto era probar validaciones de front y back en conjunto
   addPoke: async (
     name,
     hp,
@@ -122,21 +124,26 @@ module.exports = {
           name: slot2,
         },
       });
-
+      //Aca hace la maldita relacion solo para los creados tho// :D//////////////////////////////////
       await creado.addType(relation1);
       await creado.addType(relation2);
       return "Pokemon created succesfully";
     }
   },
+  //Busco al pokemon por nombre
   findPoke: async (name) => {
     let pokemon = name.toLowerCase();
     if (!pokemon) {
       throw new Error(`Pokemon ${name} doesnt exists`);
     }
     return await Pokemon.findAll({
-      where: { name: { [Op.iLike]: `%${pokemon}%` } },
+      //Busca exacto
+      where: { name: name },
+      //Busca todo lo q contenga esa serie de caracteres por el operador
+      // where: { name: { [Op.iLike]: `%${pokemon}%` } },
     });
   },
+  //Busco por query los tipos que contengan los caracteres en slot 1 y 2
   findByType: async (slot1, slot2) => {
     return await Pokemon.findAll({
       where: {
@@ -145,14 +152,13 @@ module.exports = {
       },
     });
   },
+  //Busco tipo 1
   findByType1: async (slot1) => {
     return await Pokemon.findAll({
       where: { slot1: { [Op.iLike]: `%${slot1}%` }, slot2: null },
     });
   },
-  // findByType2: async (slot2) => {
-  //   return await Pokemon.findAll({ where: { slot1:null,slot2: slot2 } });
-  // },
+  //Puedo usarla para seleccionar cuantos pokemones mando al front con el operador  y en el exclude puedo sacar los atributos que no quiero mandar de la DB
   infoMainRoute: async () => {
     const frontPokemon = await Pokemon.findAll({
       where: { idApi: { [Op.lte]: 40 } },
@@ -172,6 +178,7 @@ module.exports = {
     });
     return frontPokemon;
   },
+  //Busco por id y excluyo el uuid pq es muy largo y se ve feo jeje
   findById: async (idApi) => {
     let findId = await Pokemon.findAll({
       where: { idApi: idApi },
@@ -191,6 +198,7 @@ module.exports = {
     }
     return findId;
   },
+  //WORK IN PROGRESS DE DELETE solo para los pokemones que creo yo, no los precargados de la api
   deleteFromDb: async function (idApi) {
     var erase = await Pokemon.findOne({
       where: { createdInDb: true, idApi: idApi },
@@ -203,7 +211,7 @@ module.exports = {
       throw new Error("Can't delete original pokemons!");
     }
   },
-
+  //Devuelvo toda la DB
   getDb: async function () {
     return await Pokemon.findAll({
       attribute: ["name"],
@@ -212,11 +220,12 @@ module.exports = {
       },
     });
   },
-
+  //Devuelvo todos los types de la DB
   getTypesDb: async function () {
     return await Type.findAll();
   },
-
+  //
+  //WORK IN PROGRESS PARA ORDENAMIENTO DESDE EL BACK, le queria mandar parametros por body y en base a eso filtrar por ASC DESC y filtrar en la columna especifica que mande del front
   orderBy: async function (by, filters) {
     let ordenado = await Pokemon.findAll({
       order: [[`${by}`, `${filters}`]],
@@ -224,6 +233,8 @@ module.exports = {
 
     return ordenado;
   },
+  //
+  //WORK IN PROGRESS funcion para modificar el back y cambiar los pokemones de mi equipo, me falla el patch
   capturePoke: async function (idApi) {
     let captured = await Pokemon.findOne({
       where: { idApi: idApi },

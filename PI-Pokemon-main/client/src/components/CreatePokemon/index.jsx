@@ -12,6 +12,9 @@ function validate(data) {
   if (!data.slot1) {
     errors.slot1 = "Select a type pls";
   }
+  if (data.slot1 === data.slot2) {
+    errors.slot2 = "Choose a different type";
+  }
   if (!data.hp) {
     errors.hp = "Select hp for your poke";
   }
@@ -158,6 +161,7 @@ const CreatePokemon = () => {
                   </option>
                 ))}
               </select>
+              {errors.slot2 && <p className="error">{errors.slot2}</p>}
             </div>
             <br />
             <div className="inputContainer">
@@ -171,7 +175,7 @@ const CreatePokemon = () => {
                 name="hp"
                 value={data.hp}
                 onChange={handleChange}
-                max={200}
+                max={255}
                 min={1}
               />
               {errors.hp && <p className="error">{errors.hp}</p>}
@@ -189,7 +193,7 @@ const CreatePokemon = () => {
                 value={data.str}
                 onChange={handleChange}
                 maxLength={3}
-                max={200}
+                max={255}
                 min={1}
               />
               {errors.str && <p className="error">{errors.str}</p>}
@@ -208,7 +212,7 @@ const CreatePokemon = () => {
                 value={data.def}
                 onChange={handleChange}
                 maxLength={3}
-                max={200}
+                max={255}
                 min={1}
               />
               {errors.def && <p className="error">{errors.def}</p>}
@@ -226,7 +230,7 @@ const CreatePokemon = () => {
                 value={data.spd}
                 onChange={handleChange}
                 maxLength={3}
-                max={200}
+                max={255}
                 min={1}
               />
               {errors.spd && <p className="error">{errors.spd}</p>}
@@ -238,14 +242,14 @@ const CreatePokemon = () => {
               <br />
               <input
                 className="input"
-                placeholder="Height value"
+                placeholder="Inches"
                 required
                 type="number"
                 name="height"
                 value={data.height}
                 onChange={handleChange}
                 maxLength={5}
-                max={10000}
+                max={100}
                 min={1}
               />
               {errors.height && <p className="error">{errors.height}</p>}
@@ -256,14 +260,14 @@ const CreatePokemon = () => {
               <br />
               <input
                 className="input"
-                placeholder="Weight value"
+                placeholder="Lbs"
                 required
                 type="number"
                 name="weight"
                 value={data.weight}
                 onChange={handleChange}
                 maxLength={5}
-                max={10000}
+                max={2500}
                 min={1}
               />
               {errors.weight && <p className="error">{errors.weight}</p>}
@@ -290,7 +294,6 @@ const CreatePokemon = () => {
           Hatch!
         </button>
       </form>
-      {console.log(errors)}
     </div>
   );
 };

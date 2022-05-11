@@ -1,6 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import { fetchPokemons, getTypes } from "./redux/actions";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home/index.jsx";
 import PokemonList from "./Pages/PokemonList/PokemonList";
@@ -8,11 +7,8 @@ import NavBar from "./components/NavBar/index.jsx";
 import DetailList from "./Pages/PokemonDetails/PokemonDetails";
 import CreatePokemon from "./components/CreatePokemon";
 import Team from "./components/Team";
-import { useStore } from "./context/store";
 
 function App() {
-
-
   return (
     <>
       <Router>

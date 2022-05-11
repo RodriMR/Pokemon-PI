@@ -9,22 +9,24 @@ export default function SearchBar({ setError }) {
     setInput(e.target.value);
   };
 
-  const [, dispatch] = useStore();
+  const [state, dispatch] = useStore();
   const handleSubmit = async (e) => {
     try {
       e.preventDefault(); //para evtiar que refresque la pagina
+      var toLowerCase = input.toLowerCase(); //asi no me lo buscan con mayusc
       const res = await axios.get(
-        `http://localhost:3001/pokemons?name=${input}`
+        `http://localhost:3001/pokemons?name=${toLowerCase}`
       );
       dispatch({
         type: GET_POKEMONS,
         payload: res.data,
       });
+      setInput("");
       setError(false);
     } catch (err) {
       setError(true);
+      console.log(err);
     }
-    // setSelectedPoke([res])//manda el json al componente padre para setear el estado
   };
 
   return (

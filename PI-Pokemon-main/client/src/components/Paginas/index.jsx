@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 const Paginas = ({ pokemonNum, pagina, pokemonsInPage }) => {
-  const pages = Math.round(pokemonNum / pokemonsInPage);
+  const pages = Math.floor(pokemonNum / pokemonsInPage);
 
   const numPages = [];
   for (let i = 0; i <= pages; i++) {
